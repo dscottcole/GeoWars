@@ -16,7 +16,7 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    if (enemiesArray.length < 0) {
+    if (enemiesArray.length < 10) {
         const width = 25
         const height = 25
         const xPos =  Math.floor(Math.random() * (world.width - width))

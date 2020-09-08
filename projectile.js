@@ -6,7 +6,7 @@ class Projectile {
         this.yPos = pY
         this.angle = angle
         this.radius = 5
-        this.speed = 1
+        this.speed = 5
         this.color = 'orange'
         this.quad = quad
     }
@@ -56,31 +56,31 @@ const enableMouse = () => {
         let dirY
         
 
-        if (bx >= world.width/2 && by < world.height/2) {
+        if (bx >= ax && by < ay) {
             quad = 1
             dirX = player.radius + cannonLength
             dirY = (player.radius + cannonLength) * -1
-            angle = getAngleDeg(ax, ay, bx, by) * -1
-        } else if (bx < world.width/2 && by < world.height/2) {
+            angle = getAngle(ax, ay, bx, by)
+        } else if (bx < ax && by < ay) {
             quad = 2
             dirX = (player.radius + cannonLength) * -1
             dirY = (player.radius + cannonLength) * -1
-            angle = 180 - getAngleDeg(ax, ay, bx, by)
-        } else if (bx < world.width/2 && by >= world.height/2) {
+            angle = getAngle(ax, ay, bx, by)
+        } else if (bx < ax && by >= ay) {
             quad = 3
             dirX = (player.radius + cannonLength) * -1
             dirY = player.radius + cannonLength
-            angle = 180 + (getAngleDeg(ax, ay, bx, by) * -1 )
-        } else if (bx >= world.width/2 && by >= world.height/2) {
+            angle = getAngle(ax, ay, bx, by)
+        } else if (bx >= ax && by >= ay) {
             quad = 4
             dirX = player.radius + cannonLength
             dirY = player.radius + cannonLength
-            angle = 360 - getAngleDeg(ax, ay, bx, by)
+            angle = getAngle(ax, ay, bx, by)
         }
     
 
         // console.log(e)
-        console.log(getAngleDeg(ax, ay, bx, by))
+        console.log(getAngle(ax, ay, bx, by))
         console.log(angle)
         console.log(quad)
 
@@ -88,11 +88,12 @@ const enableMouse = () => {
     })
 }
 
-function getAngleDeg(ax,ay,bx,by) {
-    var angleRad = Math.atan((ay-by)/(ax-bx));
-    var angleDeg = angleRad * 180 / Math.PI;
+function getAngle(ax,ay,bx,by) {
+    let angleRad = Math.atan((ay-by)/(ax-bx));
+    // let angleDeg = angleRad * 180 / Math.PI;
     
-    return(angleDeg);
+    // return(angleDeg);
+    return(angleRad)
 }
 
 const drawProjectiles = () => {
@@ -100,23 +101,23 @@ const drawProjectiles = () => {
     projectileArray.forEach(projectile => {  
 
         if (projectile.quad === 1) {
-            projectile.xPos += projectile.speed
-            projectile.yPos -= projectile.speed
+            projectile.xPos += projectile.speed * Math.cos(projectile.angle)
+            projectile.yPos += projectile.speed * Math.sin(projectile.angle)
             // projectile.xPos += projectile.speed / Math.tan(projectile.angle)
             // projectile.yPos += Math.tan(projectile.angle) * (-1 * projectile.speed)
         } else if (projectile.quad === 2) {
-            projectile.xPos -= projectile.speed 
-            projectile.yPos -= projectile.speed
+            projectile.xPos -= projectile.speed * Math.cos(projectile.angle)
+            projectile.yPos -= projectile.speed * Math.sin(projectile.angle)
             // projectile.xPos += (-1 * projectile.speed) / Math.tan(projectile.angle)
             // projectile.yPos += Math.tan(projectile.angle) * (-1 * projectile.speed)
         } else if (projectile.quad === 3) {
-            projectile.xPos -= projectile.speed
-            projectile.yPos += projectile.speed
+            projectile.xPos -= projectile.speed * Math.cos(projectile.angle)
+            projectile.yPos -= projectile.speed * Math.sin(projectile.angle)
             // projectile.xPos += (-1 * projectile.speed) / Math.tan(projectile.angle)
             // projectile.yPos += Math.tan(projectile.angle) * projectile.speed
         } else if (projectile.quad === 4) {
-            projectile.xPos += projectile.speed
-            projectile.yPos += projectile.speed
+            projectile.xPos += projectile.speed * Math.cos(projectile.angle)
+            projectile.yPos += projectile.speed * Math.sin(projectile.angle)
             // projectile.xPos += projectile.speed / Math.tan(projectile.angle)
             // projectile.yPos += Math.tan(projectile.angle) * projectile.speed
         }           
