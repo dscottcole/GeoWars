@@ -23,11 +23,14 @@ class Projectile {
     //     })
     // }
     draw () {
+        ctx.save()
+        ctx.rotate((Math.PI / 180) * this.angle);
         ctx.beginPath();
-        ctx.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
+        ctx.arc(world.width, world.height, this.radius, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
+        ctx.restore()
     }
 }
 
@@ -60,22 +63,22 @@ const enableMouse = () => {
             quad = 1
             dirX = player.radius + cannonLength
             dirY = (player.radius + cannonLength) * -1
-            angle = getAngleDeg(ax, ay, bx, by) * -1
+            angle = 360 + getAngleDeg(ax, ay, bx, by)
         } else if (bx < world.width/2 && by < world.height/2) {
             quad = 2
             dirX = (player.radius + cannonLength) * -1
             dirY = (player.radius + cannonLength) * -1
-            angle = 180 - getAngleDeg(ax, ay, bx, by)
+            angle = 180 + getAngleDeg(ax, ay, bx, by)
         } else if (bx < world.width/2 && by >= world.height/2) {
             quad = 3
             dirX = (player.radius + cannonLength) * -1
             dirY = player.radius + cannonLength
-            angle = 180 + (getAngleDeg(ax, ay, bx, by) * -1 )
+            angle = 180 + getAngleDeg(ax, ay, bx, by)
         } else if (bx >= world.width/2 && by >= world.height/2) {
             quad = 4
             dirX = player.radius + cannonLength
             dirY = player.radius + cannonLength
-            angle = 360 - getAngleDeg(ax, ay, bx, by)
+            angle = getAngleDeg(ax, ay, bx, by)
         }
     
 
