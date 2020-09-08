@@ -1,6 +1,5 @@
 const enemiesArray = []
 
-
 class Enemy {
     constructor(width, height, xPos, yPos) {
         this.width = width
@@ -17,7 +16,7 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    if (enemiesArray.length < 20) {
+    if (enemiesArray.length < 0) {
         const width = 25
         const height = 25
         const xPos =  Math.floor(Math.random() * (world.width - width))
@@ -30,7 +29,8 @@ const generateEnemy = () => {
 
 const drawEnemies = () => {
     
-    enemiesArray.forEach(enemy => {        
+    enemiesArray.forEach(enemy => {  
+
         if (enemy.xPos > player.xPos) {
             enemy.xPos -= enemy.velocity
         } else {
