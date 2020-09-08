@@ -30,7 +30,6 @@ const generateEnemy = () => {
 
 const drawEnemies = () => {
     
-    
     enemiesArray.forEach(enemy => {        
         if (enemy.xPos > player.xPos) {
             enemy.xPos -= enemy.velocity
@@ -43,7 +42,7 @@ const drawEnemies = () => {
         } else {
             enemy.yPos += enemy.velocity
         }
-        // requestAnimationFrame(enemy.draw())              
+           
         enemy.draw()
     })
 }
