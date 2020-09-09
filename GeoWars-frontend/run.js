@@ -3,13 +3,12 @@ let endTime
 let survivalTime
 
 document.addEventListener('DOMContentLoaded', () => {
+    loginCheck()
     player.draw()
     enablePlayer()
     enableMouse()
     startTime = Date.now()
     appendMetrics()
-
-
     // test()
 })
 
@@ -36,7 +35,6 @@ const enemies = () => {
 const timeAlive = () => {
     endTime = Date.now()
     survivalTime = (endTime - startTime)/1000
-    // console.log(survivalTime)
 }
 
 const animateInterval = setInterval(animate, 50)
@@ -72,4 +70,43 @@ const timeInterval = setInterval(displayTime, 1000)
 const displayAccuracy = () => {
     const accuracySpan = document.querySelector('#accuracy')
     accuracySpan.innerText = `Accuracy: ${accuracy} %`
+}
+
+
+const submitNewScore = (score, time, acc) => {
+
+    if (isNaN(acc)) { acc = 0}
+
+    let newScore = {
+        "score": {
+            "score": score,
+            "time_alive": time,
+            "accuracy": acc,
+            "user_id": parseInt(window.localStorage.user_id)
+        }
+    }
+
+    fetch ('http://localhost:3000/scores', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        },
+      body: JSON.stringify(newScore)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.message === "Your new score has been added to the scoreboard!") {
+            displayScoreboard()
+        }
+    })
+}
+
+const displayScoreboard = () => {
+    window.location.href = "./scoreboard.html"
+}
+
+const loginCheck = () => {
+    if (window.localStorage.user_id === undefined) {
+        window.location.href = "../index.html"
+    }
 }
