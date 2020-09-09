@@ -20,7 +20,11 @@ class Player {
                 gameOver.innerText = 'LOL. You suck!'
                 clearInterval(animateInterval)
                 clearInterval(enemyInterval)
+                endTime = Date.now()
                 body.append(gameOver)
+                timeAlive()
+                calcAccuracy()
+                console.log(enemiesDestroyed)
             }
         })
     }

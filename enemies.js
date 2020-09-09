@@ -8,13 +8,6 @@ class Enemy {
         this.yPos = yPos
         this.velocity = Math.ceil(Math.random() * (5))
     }
-    // hitDetect () {
-    //     projectileArray.forEach(projectile => {
-    //         if (this.xPos + this.width >= projectile.xPos && this.xPos - this.width <= projectile.xPos+projectile.radius && this.yPos+this.height >= projectile.yPos && this.yPos - this.height <= projectile.yPos+projectile.radius) {
-    //             enemiesArray.splice(enemiesArray.indexOf(this),1)
-    //         }
-    //     })
-    // }
     draw () {
         ctx.fillStyle = 'red'
         ctx.fillRect(this.xPos, this.yPos, this.width, this.height)
