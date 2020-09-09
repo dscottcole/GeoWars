@@ -1,6 +1,6 @@
 const body = document.querySelector("body")
 const world = document.querySelector('#world')
-
+const metricsDiv = document.querySelector('.metrics')
 
 let ctx = world.getContext('2d');
 
@@ -20,11 +20,10 @@ class Player {
                 gameOver.innerText = 'LOL. You suck!'
                 clearInterval(animateInterval)
                 clearInterval(enemyInterval)
-                endTime = Date.now()
-                body.append(gameOver)
-                timeAlive()
-                calcAccuracy()
-                console.log(enemiesDestroyed)
+                metricsDiv.append(gameOver)
+                console.log(`Time Alive: ${survivalTime} seconds`)
+                console.log(`Accuracy: ${accuracy} %`)
+                console.log(`Score: ${enemiesDestroyed}`)
             }
         })
     }

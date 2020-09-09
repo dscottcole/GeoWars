@@ -15,7 +15,7 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    if (enemiesArray.length < 25) {
+    // if (enemiesArray.length < 25) {
         const width = 25
         const height = 25
     
@@ -25,7 +25,7 @@ const generateEnemy = () => {
     
         let enemy = new Enemy(width, height, xPos, yPos)
         enemiesArray.push(enemy)
-    }
+    // }
 }
 
 const generateX = (width) => Math.floor(Math.random() * (world.width - width))
@@ -37,8 +37,10 @@ const xCheck = (width) => {
     let highX = (player.xPos - player.radius) + 50 
     let lowX = (player.xPos - player.radius) - 50
 
-    if (x <= highX && x >= lowX) { 
+    if (x <= highX && x >= lowX) {
+        console.log('I whould have killed you X')
         xCheck(width)
+
     } else {
         return x
     }
@@ -54,6 +56,7 @@ const yCheck = (height) => {
     let lowY = (player.yPos - player.radius) - 50
 
     if (y <= highY && y >= lowY) { 
+        console.log('I whould have killed you Y')
         yCheck(height)
     } else {
         return y

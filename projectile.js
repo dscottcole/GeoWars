@@ -9,17 +9,19 @@ class Projectile {
         this.yPos = pY
         this.angle = angle
         this.radius = 5
-        this.speed = 5
+        this.speed = 8
         this.color = 'orange'
         this.quad = quad
     }
     hitDetect () {
-        for(let i = 0; i < enemiesArray.length; i++){
+        for (let i = 0; i < enemiesArray.length; i++){
             let enemy = enemiesArray[i];
             if (this.xPos+this.radius >= enemy.xPos && this.xPos - this.radius <= enemy.xPos+enemy.width && this.yPos+this.radius >= enemy.yPos && this.yPos - this.radius <= enemy.yPos+enemy.height) {
                 projectileArray.splice(projectileArray.indexOf(this),1)
                 enemiesArray.splice(i,1)
                 enemiesDestroyed += 1
+                scoreIncrease()
+                displayAccuracy()
             } 
         }
     }
@@ -45,6 +47,7 @@ const generateProjectile = (angle, quad, pX, pY) => {
         let projectile = new Projectile(angle, quad, pX, pY)
         projectileArray.push(projectile)
         projectilesFired += 1
+        displayAccuracy()
     }
 }
 
@@ -118,7 +121,7 @@ const drawProjectiles = () => {
 
 const calcAccuracy = () => {
     accuracy = precision((enemiesDestroyed/projectilesFired) * 100)
-    console.log(accuracy)
+    // console.log(accuracy)
 }
 
 function precision(num) {

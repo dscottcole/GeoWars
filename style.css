@@ -1,3 +1,17 @@
 #world {
     background-color: black;
   }
+
+.metrics {
+  vertical-align: middle;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+span {
+  margin-right: 25px;
+}
+
+h1 {
+  padding-left: 80px;
+}
