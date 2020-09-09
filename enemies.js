@@ -7,8 +7,14 @@ class Enemy {
         this.xPos = xPos
         this.yPos = yPos
         this.velocity = Math.ceil(Math.random() * (5))
-
     }
+    // hitDetect () {
+    //     projectileArray.forEach(projectile => {
+    //         if (this.xPos + this.width >= projectile.xPos && this.xPos - this.width <= projectile.xPos+projectile.radius && this.yPos+this.height >= projectile.yPos && this.yPos - this.height <= projectile.yPos+projectile.radius) {
+    //             enemiesArray.splice(enemiesArray.indexOf(this),1)
+    //         }
+    //     })
+    // }
     draw () {
         ctx.fillStyle = 'red'
         ctx.fillRect(this.xPos, this.yPos, this.width, this.height)
@@ -16,14 +22,48 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    if (enemiesArray.length < 10) {
+    if (enemiesArray.length < 25) {
         const width = 25
         const height = 25
-        const xPos =  Math.floor(Math.random() * (world.width - width))
-        const yPos = Math.floor(Math.random() * (world.height - height))
+    
+        let xPos =  xCheck(width)
+        let yPos = yCheck(height)
+      
     
         let enemy = new Enemy(width, height, xPos, yPos)
         enemiesArray.push(enemy)
+    }
+}
+
+const generateX = (width) => Math.floor(Math.random() * (world.width - width))
+
+const xCheck = (width) => {
+
+    let x = generateX(width)
+
+    let highX = (player.xPos - player.radius) + 50 
+    let lowX = (player.xPos - player.radius) - 50
+
+    if (x <= highX && x >= lowX) { 
+        xCheck(width)
+    } else {
+        return x
+    }
+}
+
+const generateY = (height) => Math.floor(Math.random() * (world.height - height))
+
+const yCheck = (height) => {
+
+    let y = generateY(height)
+
+    let highY = (player.yPos - player.radius) + 50 
+    let lowY = (player.yPos - player.radius) - 50
+
+    if (y <= highY && y >= lowY) { 
+        yCheck(height)
+    } else {
+        return y
     }
 }
 
@@ -44,5 +84,6 @@ const drawEnemies = () => {
         }
            
         enemy.draw()
+
     })
 }
