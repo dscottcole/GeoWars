@@ -66,7 +66,6 @@ const enableMouse = () => {
 
         // clearInterval(mouseInterval)
     // })
-
 }
 
 const mousedownFn = (e) => {
@@ -120,10 +119,6 @@ const drawProjectiles = () => {
 }
 
 const calcAccuracy = () => {
-    accuracy = precision((enemiesDestroyed/projectilesFired) * 100)
+    accuracy = parseFloat(enemiesDestroyed/projectilesFired).toFixed(3)* 100
     // console.log(accuracy)
-}
-
-function precision(num) {
-    return Number.parseFloat(num).toPrecision(3);
 }

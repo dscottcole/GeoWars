@@ -21,9 +21,10 @@ class Player {
                 clearInterval(animateInterval)
                 clearInterval(enemyInterval)
                 metricsDiv.append(gameOver)
-                console.log(`Time Alive: ${survivalTime} seconds`)
-                console.log(`Accuracy: ${accuracy} %`)
-                console.log(`Score: ${enemiesDestroyed}`)
+                submitNewScore(enemiesDestroyed, survivalTime, accuracy)
+                // console.log(`Time Alive: ${survivalTime} seconds`)
+                // console.log(`Accuracy: ${accuracy} %`)
+                // console.log(`Score: ${enemiesDestroyed}`)
             }
         })
     }

@@ -25,6 +25,11 @@ class ScoresController < ApplicationController
         render :json => {"message": "Your new score has been added to the scoreboard!"}
     end
 
+    def update
+        byebug
+    end
+
+
     private
 
     def score_params

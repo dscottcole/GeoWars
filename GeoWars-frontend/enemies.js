@@ -38,7 +38,7 @@ const xCheck = (width) => {
     let lowX = (player.xPos - player.radius) - 50
 
     if (x <= highX && x >= lowX) {
-        console.log('I whould have killed you X')
+        // console.log('I whould have killed you X')
         xCheck(width)
 
     } else {
@@ -56,7 +56,7 @@ const yCheck = (height) => {
     let lowY = (player.yPos - player.radius) - 50
 
     if (y <= highY && y >= lowY) { 
-        console.log('I whould have killed you Y')
+        // console.log('I whould have killed you Y')
         yCheck(height)
     } else {
         return y
