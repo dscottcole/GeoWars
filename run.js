@@ -13,10 +13,6 @@ const animate = () => {
     drawEnemies()
 }
 
-// const projectilesAni = () => {
-//     drawProjectiles()
-// }
-
 const enemies = () => {
     generateEnemy()
 }
@@ -28,6 +24,5 @@ const enemies = () => {
 // }
 
 const animateInterval = setInterval(animate, 50)
-// const projectileInterval = setInterval(projectilesAni,1000)
-const enemyInterval = setInterval (enemies, 2000)
+const enemyInterval = setInterval (enemies, 500)
 

@@ -35,14 +35,13 @@ class Player {
 
 const player = new Player(world.width/2, world.height/2, 25, 25, 'blue')
 
-
 let Top = 87
 let Bottom = 83
 let Left = 65
 let Right = 68
 
 const keydownHandler = event => {
-console.log({code: event.keyCode})
+// console.log({code: event.keyCode})
     if (event.keyCode == Bottom) { 
         if (player.yPos + player.velocity > world.height - (player.radius)) {
             player.yPos

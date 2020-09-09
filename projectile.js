@@ -1,7 +1,7 @@
 const projectileArray = []
 
 class Projectile {
-    constructor(angle, dirX, dirY, quad, pX, pY) {
+    constructor(angle, quad, pX, pY) {
         this.xPos = pX
         this.yPos = pY
         this.angle = angle
@@ -10,89 +10,73 @@ class Projectile {
         this.color = 'orange'
         this.quad = quad
     }
-    // hitDetect () {
-    //     enemiesArray.forEach(enemy => {
-    //         if (this.xPos+this.radius >= enemy.xPos && this.xPos - this.radius <= enemy.xPos+enemy.width && this.yPos+this.radius >= enemy.yPos && this.yPos - this.radius <= enemy.yPos+enemy.height) {
-    //             world.remove()
-    //             const gameOver = document.createElement('h1')
-    //             gameOver.innerText = 'LOL. You suck!'
-    //             clearInterval(animateInterval)
-    //             clearInterval(enemyInterval)
-    //             body.append(gameOver)
-    //         }
-    //     })
-    // }
+    hitDetect () {
+        for(let i = 0; i < enemiesArray.length; i++){
+            let enemy = enemiesArray[i];
+        // enemiesArray.forEach(enemy => {
+            if (this.xPos+this.radius >= enemy.xPos && this.xPos - this.radius <= enemy.xPos+enemy.width && this.yPos+this.radius >= enemy.yPos && this.yPos - this.radius <= enemy.yPos+enemy.height) {
+                projectileArray.splice(projectileArray.indexOf(this),1)
+                enemiesArray.splice(i,1)
+            } 
+        }
+        // })
+    }
+    wallDetect () {
+        if (this.xPos > world.width || this.xPos < 0 || this.yPos > world.height || this.yPos < 0) {
+            projectileArray.splice(projectileArray.indexOf(this),1)
+        }
+    }
     draw () {
         ctx.beginPath();
         ctx.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
+        this.hitDetect()
+        this.wallDetect()
     }
 }
 
-
-const generateProjectile = (angle, dirX, dirY, quad, pX, pY) => {
-    if (projectileArray.length < 1000) {
+const generateProjectile = (angle, quad, pX, pY) => {
+    if (projectileArray.length < 25) {
     
-        let projectile = new Projectile(angle, dirX, dirY, quad, pX, pY)
+        let projectile = new Projectile(angle, quad, pX, pY)
         projectileArray.push(projectile)
-        console.log(projectile)
-        console.log(projectileArray)
+        console.log(projectileArray.length)
     }
 }
 
 const enableMouse = () => { 
-    world.addEventListener('click', (e) => {
-        e.preventDefault()
+    world.addEventListener('mousedown', (e) => {
+        
+       
         let ax = player.xPos
         let ay = player.yPos
         let bx = e.clientX
         let by = e.clientY
-        let cannonLength = 0
-    
         let angle
-        let dirX
-        let dirY
-        
 
         if (bx >= ax && by < ay) {
             quad = 1
-            dirX = player.radius + cannonLength
-            dirY = (player.radius + cannonLength) * -1
             angle = getAngle(ax, ay, bx, by)
         } else if (bx < ax && by < ay) {
             quad = 2
-            dirX = (player.radius + cannonLength) * -1
-            dirY = (player.radius + cannonLength) * -1
             angle = getAngle(ax, ay, bx, by)
         } else if (bx < ax && by >= ay) {
             quad = 3
-            dirX = (player.radius + cannonLength) * -1
-            dirY = player.radius + cannonLength
             angle = getAngle(ax, ay, bx, by)
         } else if (bx >= ax && by >= ay) {
             quad = 4
-            dirX = player.radius + cannonLength
-            dirY = player.radius + cannonLength
             angle = getAngle(ax, ay, bx, by)
         }
     
-
-        // console.log(e)
-        console.log(getAngle(ax, ay, bx, by))
-        console.log(angle)
-        console.log(quad)
-
-        generateProjectile(angle, dirX, dirY, quad, ax, ay)
+        generateProjectile(angle, quad, ax, ay)
     })
 }
 
 function getAngle(ax,ay,bx,by) {
     let angleRad = Math.atan((ay-by)/(ax-bx));
-    // let angleDeg = angleRad * 180 / Math.PI;
-    
-    // return(angleDeg);
+
     return(angleRad)
 }
 
@@ -103,23 +87,15 @@ const drawProjectiles = () => {
         if (projectile.quad === 1) {
             projectile.xPos += projectile.speed * Math.cos(projectile.angle)
             projectile.yPos += projectile.speed * Math.sin(projectile.angle)
-            // projectile.xPos += projectile.speed / Math.tan(projectile.angle)
-            // projectile.yPos += Math.tan(projectile.angle) * (-1 * projectile.speed)
         } else if (projectile.quad === 2) {
             projectile.xPos -= projectile.speed * Math.cos(projectile.angle)
             projectile.yPos -= projectile.speed * Math.sin(projectile.angle)
-            // projectile.xPos += (-1 * projectile.speed) / Math.tan(projectile.angle)
-            // projectile.yPos += Math.tan(projectile.angle) * (-1 * projectile.speed)
         } else if (projectile.quad === 3) {
             projectile.xPos -= projectile.speed * Math.cos(projectile.angle)
             projectile.yPos -= projectile.speed * Math.sin(projectile.angle)
-            // projectile.xPos += (-1 * projectile.speed) / Math.tan(projectile.angle)
-            // projectile.yPos += Math.tan(projectile.angle) * projectile.speed
         } else if (projectile.quad === 4) {
             projectile.xPos += projectile.speed * Math.cos(projectile.angle)
             projectile.yPos += projectile.speed * Math.sin(projectile.angle)
-            // projectile.xPos += projectile.speed / Math.tan(projectile.angle)
-            // projectile.yPos += Math.tan(projectile.angle) * projectile.speed
         }           
         projectile.draw()
     })
