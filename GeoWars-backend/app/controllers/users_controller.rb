@@ -30,9 +30,9 @@ class UsersController < ApplicationController
         @user = User.find_by(username: user_params[:username])
         
         if @user && @user.authenticate(user_params[:password])
-            render json: @user.to_json
-            #     only: [:id, :username]
-            # )
+            render json: @user.to_json(
+                only: [:id, :username]
+            )
         else
             render :json => {"message": "This username & password combination is invalid. Create an account or try again."}
         end
