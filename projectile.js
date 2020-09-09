@@ -1,4 +1,7 @@
 const projectileArray = []
+let projectilesFired = 0
+let enemiesDestroyed = 0
+let accuracy
 
 class Projectile {
     constructor(angle, quad, pX, pY) {
@@ -13,13 +16,12 @@ class Projectile {
     hitDetect () {
         for(let i = 0; i < enemiesArray.length; i++){
             let enemy = enemiesArray[i];
-        // enemiesArray.forEach(enemy => {
             if (this.xPos+this.radius >= enemy.xPos && this.xPos - this.radius <= enemy.xPos+enemy.width && this.yPos+this.radius >= enemy.yPos && this.yPos - this.radius <= enemy.yPos+enemy.height) {
                 projectileArray.splice(projectileArray.indexOf(this),1)
                 enemiesArray.splice(i,1)
+                enemiesDestroyed += 1
             } 
         }
-        // })
     }
     wallDetect () {
         if (this.xPos > world.width || this.xPos < 0 || this.yPos > world.height || this.yPos < 0) {
@@ -42,41 +44,54 @@ const generateProjectile = (angle, quad, pX, pY) => {
     
         let projectile = new Projectile(angle, quad, pX, pY)
         projectileArray.push(projectile)
-        console.log(projectileArray.length)
+        projectilesFired += 1
     }
 }
 
-const enableMouse = () => { 
-    world.addEventListener('mousedown', (e) => {
-        
-       
-        let ax = player.xPos
-        let ay = player.yPos
-        let bx = e.clientX
-        let by = e.clientY
-        let angle
+// let mouseInterval
 
-        if (bx >= ax && by < ay) {
-            quad = 1
-            angle = getAngle(ax, ay, bx, by)
-        } else if (bx < ax && by < ay) {
-            quad = 2
-            angle = getAngle(ax, ay, bx, by)
-        } else if (bx < ax && by >= ay) {
-            quad = 3
-            angle = getAngle(ax, ay, bx, by)
-        } else if (bx >= ax && by >= ay) {
-            quad = 4
-            angle = getAngle(ax, ay, bx, by)
-        }
-    
-        generateProjectile(angle, quad, ax, ay)
+const enableMouse = () => { 
+    world.addEventListener('mousedown', function(e) {
+        // console.log(e)
+        mousedownFn(e)
+
+        // mouseInterval = setInterval(mousedownFn(e), 50)
     })
+
+    // world.addEventListener('mouseup', function(e) {
+        // console.log(e)
+
+        // clearInterval(mouseInterval)
+    // })
+
+}
+
+const mousedownFn = (e) => {
+    
+    let ax = player.xPos
+    let ay = player.yPos
+    let bx = e.clientX
+    let by = e.clientY
+    let angle
+
+    if (bx >= ax && by < ay) {
+        quad = 1
+        angle = getAngle(ax, ay, bx, by)
+    } else if (bx < ax && by < ay) {
+        quad = 2
+        angle = getAngle(ax, ay, bx, by)
+    } else if (bx < ax && by >= ay) {
+        quad = 3
+        angle = getAngle(ax, ay, bx, by)
+    } else if (bx >= ax && by >= ay) {
+        quad = 4
+        angle = getAngle(ax, ay, bx, by)
+    }
+    generateProjectile(angle, quad, ax, ay)
 }
 
 function getAngle(ax,ay,bx,by) {
     let angleRad = Math.atan((ay-by)/(ax-bx));
-
     return(angleRad)
 }
 
@@ -99,4 +114,13 @@ const drawProjectiles = () => {
         }           
         projectile.draw()
     })
+}
+
+const calcAccuracy = () => {
+    accuracy = precision((enemiesDestroyed/projectilesFired) * 100)
+    console.log(accuracy)
+}
+
+function precision(num) {
+    return Number.parseFloat(num).toPrecision(3);
 }

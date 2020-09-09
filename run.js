@@ -1,7 +1,13 @@
+let startTime
+let endTime
+let survivalTime
+
 document.addEventListener('DOMContentLoaded', () => {
     player.draw()
     enablePlayer()
     enableMouse()
+    startTime = Date.now()
+
     // test()
 })
 
@@ -22,6 +28,11 @@ const enemies = () => {
 
 //     })
 // }
+
+const timeAlive = () => {
+    survivalTime = (endTime - startTime)/1000
+    console.log(survivalTime)
+}
 
 const animateInterval = setInterval(animate, 50)
 const enemyInterval = setInterval (enemies, 500)
