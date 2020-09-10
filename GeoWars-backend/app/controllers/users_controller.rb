@@ -19,8 +19,19 @@ class UsersController < ApplicationController
         render json: @user.to_json
     end
 
-    def create 
-        User.create(user_params)
+    def create
+        @user = User.new(user_params)
+
+        if @user.valid?
+            @user.save
+            render json: @user.to_json(
+                only: [:id, :username]
+            )
+        else
+            error_array = []
+            @user.errors.messages.each {|e| error_array.push(e)}
+            render :json => {"message": error_array }
+        end
     end
 
     def login

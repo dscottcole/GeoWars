@@ -1,4 +1,4 @@
-const enemiesArray = []
+let enemiesArray = []
 
 class Enemy {
     constructor(width, height, xPos, yPos) {

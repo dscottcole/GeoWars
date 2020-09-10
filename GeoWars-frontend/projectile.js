@@ -1,7 +1,7 @@
-const projectileArray = []
+let projectileArray = []
 let projectilesFired = 0
 let enemiesDestroyed = 0
-let accuracy
+let accuracy = 0
 
 class Projectile {
     constructor(angle, quad, pX, pY) {
@@ -21,7 +21,7 @@ class Projectile {
                 enemiesArray.splice(i,1)
                 enemiesDestroyed += 1
                 scoreIncrease()
-                displayAccuracy()
+                calcAccuracy()
             } 
         }
     }
@@ -47,7 +47,7 @@ const generateProjectile = (angle, quad, pX, pY) => {
         let projectile = new Projectile(angle, quad, pX, pY)
         projectileArray.push(projectile)
         projectilesFired += 1
-        displayAccuracy()
+        calcAccuracy()
     }
 }
 
@@ -120,5 +120,5 @@ const drawProjectiles = () => {
 
 const calcAccuracy = () => {
     accuracy = parseFloat(enemiesDestroyed/projectilesFired).toFixed(3)* 100
-    // console.log(accuracy)
+    displayAccuracy()
 }
