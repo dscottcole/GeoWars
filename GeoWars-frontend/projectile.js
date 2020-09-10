@@ -54,11 +54,12 @@ const generateProjectile = (angle, quad, pX, pY) => {
 // let mouseInterval
 
 const enableMouse = () => { 
-    world.addEventListener('mousedown', function(e) {
+    world.addEventListener('click', function(e) {
         // console.log(e)
-        mousedownFn(e)
+        e.preventDefault()
+        clickFn(e)
 
-        // mouseInterval = setInterval(mousedownFn(e), 50)
+        // mouseInterval = setInterval(clickFn(e), 50)
     })
 
     // world.addEventListener('mouseup', function(e) {
@@ -68,7 +69,7 @@ const enableMouse = () => {
     // })
 }
 
-const mousedownFn = (e) => {
+const clickFn = (e) => {
     
     let ax = player.xPos
     let ay = player.yPos
@@ -119,6 +120,12 @@ const drawProjectiles = () => {
 }
 
 const calcAccuracy = () => {
-    accuracy = parseFloat(enemiesDestroyed/projectilesFired).toFixed(3)* 100
+    // accuracy = parseFloat(enemiesDestroyed/projectilesFired).toFixed(3)* 100
+    accuracy = round((enemiesDestroyed/projectilesFired) * 100, 2)
+
     displayAccuracy()
+}
+
+const round = (value, decimals) => {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }

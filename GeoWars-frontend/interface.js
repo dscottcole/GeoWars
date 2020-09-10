@@ -109,7 +109,7 @@ const enableGeoWarsButton = () => {
 }
 
 const returnToGeoWar = () => {
-    gameOn()
+    approvedLogin()
     hideScoreboard()
 }
 
@@ -127,17 +127,17 @@ const enableLogout = () => {
     })
 }
 
-const enableTopTen = () => {
-    const topTenButton = document.createElement('button')
-    topTenButton.id = 'top-ten-button'
-    topTenButton.className = 'button'
-    topTenButton.innerText = "Top Ten Scores"
-    scoreDiv.append(topTenButton)
+const enableAllScores = () => {
+    const allScoresButton = document.createElement('button')
+    allScoresButton.id = 'all-scores-button'
+    allScoresButton.className = 'button'
+    allScoresButton.innerText = "See All Scores"
+    scoreDiv.append(allScoresButton)
 
-    topTenButton.addEventListener('click', (e) => {
+    allScoresButton.addEventListener('click', (e) => {
         e.preventDefault()
 
-        getTenScores()
+        getScores()
     })
 }
 
@@ -157,7 +157,7 @@ const enableUserScores = () => {
 
 const enableButtons = () => {
     enableGeoWarsButton()
-    enableTopTen()
+    enableAllScores()
     enableUserScores()
     enableLogout()
     hideButtons()
@@ -165,24 +165,24 @@ const enableButtons = () => {
 
 const hideButtons = () => {
     const geoButton = document.querySelector('#geo-button')
-    const topTenButton = document.querySelector('#top-ten-button')
+    const allScoresButton = document.querySelector('#all-scores-button')
     const logoutButton = document.querySelector('#logout-button')
     const userScoresButton = document.querySelector('#user-scores-button')
 
     geoButton.style.display = 'none'
-    topTenButton.style.display = 'none'
+    allScoresButton.style.display = 'none'
     logoutButton.style.display = 'none'
     userScoresButton.style.display = 'none'
 }
 
 const showButtons = () => {
     const geoButton = document.querySelector('#geo-button')
-    const topTenButton = document.querySelector('#top-ten-button')
+    const allScoresButton = document.querySelector('#all-scores-button')
     const logoutButton = document.querySelector('#logout-button')
     const userScoresButton = document.querySelector('#user-scores-button')
     
     geoButton.style.display = 'block'
-    topTenButton.style.display = 'block'
+    allScoresButton.style.display = 'block'
     logoutButton.style.display = 'block'
     userScoresButton.style.display = 'block'
 }
