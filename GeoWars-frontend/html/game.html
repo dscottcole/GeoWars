@@ -3,13 +3,45 @@
     <head>
     </head>
     <body>
+        <div class='login'>
+            <form class='login-form'>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password">
+                <br>
+                <br>
+                <input type="submit" id="login-submit" value="Submit">
+            </form>
+        </div>
+        <br>
+        <div class='registration'>
+            <form class='registration-form'>
+                <label for="new-username">New Username:</label><br>
+                <input type="text" id="new-username" name="new-username"><br>
+                <label for="password">New Password:</label><br>
+                <input type="password" id="new-password" name="new-password"><br>
+                <label for="password">Password Confirmation:</label><br>
+                <input type="password" id="password-confirmation" name="password-confirmation">
+                <br>
+                <br>
+                <input type="submit" id="registration-submit" value="Register">
+            </form>
+        </div>
+        <div class='denied-login'></div>
         <canvas id="world" width="800" height="600"></canvas>
         <div class='metrics'></div>
+        <div class='scoreboard'>
+            <ol id='scoreboard'></ol>
+        </div>
     </body>
     <link rel="stylesheet" href="../style.css"></link>
 
+    <script src= "../interface.js"></script>
     <script src= "../enemies.js"></script>
     <script src= "../player.js"></script>
     <script src= "../projectile.js"></script>
+    <script src="../scoreboard.js"></script>
     <script src= "../run.js"></script>
 </html>

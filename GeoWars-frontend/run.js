@@ -1,16 +1,30 @@
-let startTime
-let endTime
-let survivalTime
+let startTime = 0
+let endTime = 0
+let survivalTime = 0
+
+let player
+let animateInterval
+let enemyInterval
+let timeInterval
 
 document.addEventListener('DOMContentLoaded', () => {
+    enableLoginForm()
+    enableRegistrationForm()
     loginCheck()
+    enableButtons()
+})
+
+const gameOn = () => {
+    showCanvas()
+    player = new Player(world.width/2, world.height/2, 25, 25, 'blue')
     player.draw()
     enablePlayer()
+    enableIntervals()
     enableMouse()
     startTime = Date.now()
     appendMetrics()
-    // test()
-})
+}
+
 
 const animate = () => {
     ctx.clearRect(0,0, world.width, world.height);
@@ -26,22 +40,25 @@ const enemies = () => {
     generateEnemy()
 }
 
-// const test = () => {
-//     window.addEventListener('click', (e) => {
-
-//     })
-// }
-
 const timeAlive = () => {
     endTime = Date.now()
     survivalTime = (endTime - startTime)/1000
 }
 
-const animateInterval = setInterval(animate, 50)
-const enemyInterval = setInterval (enemies, 500)
+const enableIntervals = () => {
+    animateInterval = setInterval(animate, 50)
+    enemyInterval = setInterval (enemies, 500)
+    timeInterval = setInterval(displayTime, 1000)
+}
 
+const clearIntervals = () => {
+    clearInterval(animateInterval)
+    clearInterval(enemyInterval)
+    clearInterval(timeInterval)
+}
 
 const appendMetrics = () => {
+    
     const survivalSpan = document.createElement('span')
     survivalSpan.id = 'survivalTime'
     survivalSpan.innerText = 'Time Alive: 0 seconds'
@@ -54,7 +71,6 @@ const appendMetrics = () => {
     metricsDiv.append(survivalSpan, scoreSpan, accuracySpan)
 }
 
-
 const scoreIncrease = () => {
     const scoreSpan = document.querySelector('#score')
     scoreSpan.innerText = `Score: ${enemiesDestroyed}`
@@ -65,48 +81,22 @@ const displayTime = () => {
     survivalSpan.innerText = `Time Alive: ${survivalTime} seconds`
 }
 
-const timeInterval = setInterval(displayTime, 1000)
-
 const displayAccuracy = () => {
     const accuracySpan = document.querySelector('#accuracy')
     accuracySpan.innerText = `Accuracy: ${accuracy} %`
 }
 
-
-const submitNewScore = (score, time, acc) => {
-
-    if (isNaN(acc)) { acc = 0}
-
-    let newScore = {
-        "score": {
-            "score": score,
-            "time_alive": time,
-            "accuracy": acc,
-            "user_id": parseInt(window.localStorage.user_id)
-        }
-    }
-
-    fetch ('http://localhost:3000/scores', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        },
-      body: JSON.stringify(newScore)
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.message === "Your new score has been added to the scoreboard!") {
-            displayScoreboard()
-        }
-    })
+const clearMetrics = () => {
+    while (metricsDiv.firstChild) metricsDiv.removeChild(metricsDiv.firstChild)
+    startTime = 0
+    endTime = 0
+    survivalTime = 0
+    enemiesDestroyed = 0
+    projectilesFired = 0
+    projectileArray = []
+    enemiesArray = []
 }
 
-const displayScoreboard = () => {
-    window.location.href = "./scoreboard.html"
-}
-
-const loginCheck = () => {
-    if (window.localStorage.user_id === undefined) {
-        window.location.href = "../index.html"
-    }
-}
+// const resetGame = () => {
+//     gameOn()
+// }

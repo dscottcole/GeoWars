@@ -15,12 +15,8 @@ class Player {
     hitDetect () {
         enemiesArray.forEach(enemy => {
             if (this.xPos+this.radius >= enemy.xPos && this.xPos - this.radius <= enemy.xPos+enemy.width && this.yPos+this.radius >= enemy.yPos && this.yPos - this.radius <= enemy.yPos+enemy.height) {
-                world.remove()
-                const gameOver = document.createElement('h1')
-                gameOver.innerText = 'LOL. You suck!'
-                clearInterval(animateInterval)
-                clearInterval(enemyInterval)
-                metricsDiv.append(gameOver)
+                hideCanvas()
+                clearIntervals()
                 submitNewScore(enemiesDestroyed, survivalTime, accuracy)
                 // console.log(`Time Alive: ${survivalTime} seconds`)
                 // console.log(`Accuracy: ${accuracy} %`)
@@ -36,8 +32,6 @@ class Player {
         ctx.fill();
     }
 }
-
-const player = new Player(world.width/2, world.height/2, 25, 25, 'blue')
 
 let Top = 87
 let Bottom = 83
