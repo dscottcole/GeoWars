@@ -3,7 +3,9 @@ const scoreOl = document.querySelector('#scoreboard')
 
 
 const submitNewScore = (score, time, acc) => {
-    if (isNaN(acc)) { acc = 0}
+    if (isNaN(acc)) {
+        acc = 0
+    } else {parseFloat(acc)}
 
     let newScore = {
         "score": {
@@ -61,7 +63,8 @@ const showScoreboard = () => {
 const refreshScoreboard = () => {
     showScoreboard()
     clearMetrics()
-    getScores()
+    getTenScores()
+    // getScores()
 }
 
 
@@ -76,15 +79,17 @@ const getTenScores = () => {
         })
     })
 }
-
 const getUserScores = () => {
     while (scoreOl.firstChild) scoreOl.removeChild(scoreOl.firstChild)
     fetch('http://localhost:3000/scores')
     .then(res => res.json())
     .then(scores => {            
-        let topTenScores = scores.splice(0,10)
-        topTenScores.forEach(score => {
+        let userScores = scores.filter(score => 
+            score.user_id === parseInt(window.localStorage.user_id)
+        )
+        userScores.forEach(score => {
             appendScores(score)
         })
     })
 }
+

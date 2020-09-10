@@ -1,5 +1,7 @@
 let enemiesArray = []
 
+let colorArray = ['Red', 'DarkViolet', 'DarkGreen', 'DeepPink', 'DeepSkyBlue', 'Gold', 'Ivory', 'Cyan', 'Coral', "Yellow"]
+
 class Enemy {
     constructor(width, height, xPos, yPos) {
         this.width = width
@@ -7,9 +9,10 @@ class Enemy {
         this.xPos = xPos
         this.yPos = yPos
         this.velocity = Math.ceil(Math.random() * (5))
+        this.color = colorArray[Math.floor(Math.random() * (9))]
     }
     draw () {
-        ctx.fillStyle = 'red'
+        ctx.fillStyle = this.color
         ctx.fillRect(this.xPos, this.yPos, this.width, this.height)
     }
 }
