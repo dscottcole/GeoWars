@@ -1,20 +1,69 @@
+body {
+  padding: 0;
+  margin: auto;
+  color: whitesmoke;
+  background-color: black;
+}
+
+.login {
+  text-align: center;
+  color: whitesmoke;
+}
+
+.registration {
+  text-align: center;
+  color: whitesmoke;
+}
+
+.denied-login {
+  text-align: center;
+  color: crimson;
+}
+
+.button-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: darkslategrey;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
 #world {
-    background-color: black;
+  padding: 0;
+  margin: auto;
+  text-align: center;
+  background-color: black;
+  background-image: url(./Backgrounds/Stars1.jpg);
+  background-size: 800px 600px;
   }
 
 .metrics {
-  vertical-align: middle;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding: 0;
+  margin: auto;
+  color: whitesmoke;
+  text-align: center;
+}
+
+.scoreboard {
+  text-align: center;
+  list-style-position: inside;
+  color: whitesmoke;
 }
 
 span {
+  color: whitesmoke;
   margin-right: 25px;
-}
-
-h1 {
-  padding-left: 80px;
-}
-
-.login-form {
 }

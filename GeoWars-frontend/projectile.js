@@ -42,13 +42,13 @@ class Projectile {
 }
 
 const generateProjectile = (angle, quad, pX, pY) => {
-    if (projectileArray.length < 25) {
+    // if (projectileArray.length < 25) {
     
         let projectile = new Projectile(angle, quad, pX, pY)
         projectileArray.push(projectile)
         projectilesFired += 1
         calcAccuracy()
-    }
+    // }
 }
 
 // let mouseInterval

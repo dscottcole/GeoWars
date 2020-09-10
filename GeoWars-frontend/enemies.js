@@ -37,8 +37,8 @@ const xCheck = (width) => {
 
     let x = generateX(width)
 
-    let highX = (player.xPos - player.radius) + 50 
-    let lowX = (player.xPos - player.radius) - 50
+    let highX = (player.xPos - player.radius) + 25 
+    let lowX = (player.xPos - player.radius) - 25
 
     if (x <= highX && x >= lowX) {
         // console.log('I whould have killed you X')

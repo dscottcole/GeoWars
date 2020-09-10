@@ -96,7 +96,3 @@ const clearMetrics = () => {
     projectileArray = []
     enemiesArray = []
 }
-
-// const resetGame = () => {
-//     gameOn()
-// }

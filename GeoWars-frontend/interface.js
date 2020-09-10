@@ -3,6 +3,7 @@ const loginForm = document.querySelector('.login-form')
 const registrationDiv = document.querySelector('div.registration')
 const registrationForm = document.querySelector('.registration-form')
 const deniedDiv = document.querySelector('div.denied-login')
+const menu = document.querySelector("div.button-menu")
 
 const enableLoginForm = () => {
     hideCanvas()
@@ -99,7 +100,7 @@ const enableGeoWarsButton = () => {
     geoWarsButton.id = 'geo-button'
     geoWarsButton.className = 'button'
     geoWarsButton.innerText = "Return to Battle"
-    scoreDiv.append(geoWarsButton)
+    menu.append(geoWarsButton)
 
     geoWarsButton.addEventListener('click', (e) => {
         e.preventDefault()
@@ -118,7 +119,7 @@ const enableLogout = () => {
     logoutButton.id = 'logout-button'
     logoutButton.className = 'button'
     logoutButton.innerText = "Log Out"
-    scoreDiv.append(logoutButton)
+    menu.append(logoutButton)
 
     logoutButton.addEventListener('click', (e) => {
         e.preventDefault()
@@ -132,7 +133,7 @@ const enableAllScores = () => {
     allScoresButton.id = 'all-scores-button'
     allScoresButton.className = 'button'
     allScoresButton.innerText = "See All Scores"
-    scoreDiv.append(allScoresButton)
+    menu.append(allScoresButton)
 
     allScoresButton.addEventListener('click', (e) => {
         e.preventDefault()
@@ -146,7 +147,7 @@ const enableUserScores = () => {
     userScoresButton.id = 'user-scores-button'
     userScoresButton.className = 'button'
     userScoresButton.innerText = "Your Scores"
-    scoreDiv.append(userScoresButton)
+    menu.append(userScoresButton)
 
     userScoresButton.addEventListener('click', (e) => {
         e.preventDefault()

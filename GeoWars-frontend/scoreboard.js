@@ -47,7 +47,6 @@ const appendScores = (singleScore) => {
     scoreLi.dataset.id = singleScore.id
     scoreLi.innerText = `Username: ${singleScore.user.username}, Score: ${singleScore.score}, Time Survived: ${singleScore.time_alive} seconds, Accuracy: ${singleScore.accuracy}%`
     scoreOl.append(scoreLi)
-    console.log('hi')
 }
 
 const hideScoreboard = () => {
