@@ -3,6 +3,7 @@ let projectilesFired = 0
 let enemiesDestroyed = 0
 let accuracy = 0
 
+
 class Projectile {
     constructor(angle, quad, pX, pY) {
         this.xPos = pX
@@ -55,7 +56,6 @@ const generateProjectile = (angle, quad, pX, pY) => {
 
 const enableMouse = () => { 
     world.addEventListener('click', function(e) {
-        // console.log(e)
         e.preventDefault()
         clickFn(e)
 
@@ -70,11 +70,16 @@ const enableMouse = () => {
 }
 
 const clickFn = (e) => {
+    let windowWidthCorrection = (window.innerWidth - world.width)/2
+
+    let ax = windowWidthCorrection + player.xPos - player.radius
+    let ay = player.yPos - player.radius
+    let canvasX = player.xPos
+    let canvasY = player.yPos
     
-    let ax = player.xPos
-    let ay = player.yPos
     let bx = e.clientX
     let by = e.clientY
+
     let angle
 
     if (bx >= ax && by < ay) {
@@ -90,7 +95,8 @@ const clickFn = (e) => {
         quad = 4
         angle = getAngle(ax, ay, bx, by)
     }
-    generateProjectile(angle, quad, ax, ay)
+
+    generateProjectile(angle, quad, canvasX, canvasY)
 }
 
 function getAngle(ax,ay,bx,by) {

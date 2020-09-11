@@ -4,6 +4,7 @@ const registrationDiv = document.querySelector('div.registration')
 const registrationForm = document.querySelector('.registration-form')
 const deniedDiv = document.querySelector('div.denied-login')
 const menu = document.querySelector("div.button-menu")
+const atlas = document.querySelector('.Atlas')
 
 const enableLoginForm = () => {
     hideCanvas()
@@ -63,8 +64,7 @@ const deniedLogin = (object) => {
     const deniedH = document.createElement('h2')
     deniedH.innerText = object.message
     let gandalf = document.createElement('img')
-    gandalf.src = 'https://thumbs.gfycat.com/HilariousDigitalAkitainu-size_restricted.gif'
-    gandalf.class = 'gandalf'
+    gandalf.src = '../Images/YouShallNotPass.gif'
     deniedDiv.append(deniedH, gandalf)
 }
 
@@ -76,6 +76,7 @@ const approvedLogin = () => {
     clearGandalf()
     hideLogin()
     hideRegistration()
+    clearTitleLogo()
     gameOn()
 }
 
@@ -92,6 +93,7 @@ const hideLogin = () => {
 }
 
 const showLogin = () => {
+    appendMainLogo()
     loginDiv.style.display = 'block'
 }
 
@@ -190,15 +192,18 @@ const showButtons = () => {
 
 const logout = () => {
     window.localStorage.clear()
+    clearTitleLogo()
     showLogin()
     hideScoreboard()
 }
 
 const hideCanvas = () => {
+    atlas.style.display = 'none'
     world.style.display = 'none'
 }
 
 const showCanvas = () => {
+    atlas.style.display = 'block'
     world.style.display = 'block'
 }
 
@@ -247,7 +252,6 @@ const submitRegistrationCredentials = (user, pw, pc) => {
         }        
     })    
 }
-
 const deniedRegistration = (object) => {
     clearGandalf()
     object.forEach(error => {
@@ -256,8 +260,7 @@ const deniedRegistration = (object) => {
         deniedDiv.append(deniedH)
     })
     let gandalf = document.createElement('img')
-    gandalf.src = 'https://thumbs.gfycat.com/HilariousDigitalAkitainu-size_restricted.gif'
-    gandalf.class = 'gandalf'
+    gandalf.src = '../Images/YouShallNotPass.gif'
     deniedDiv.append(gandalf)
 }
 
@@ -284,3 +287,31 @@ const appendRegistrationButton = () => {
         showRegistration()
     })
 }
+
+const titleLogoDiv = document.querySelector('.title-logo')
+const cornerLogoDiv = document.querySelector('.corner-logo')
+
+const appendCornerLogo = () => {
+
+    const cornerLogo = document.createElement('img')
+    cornerLogo.src='../Images/Logo.jpg'
+    cornerLogo.className = "cornerlogo"
+    cornerLogo.style.height = '50px'
+    cornerLogo.style.width = '60px'
+
+    cornerLogoDiv.append(cornerLogo)
+}
+
+const appendMainLogo = () => {
+    const titleLogo = document.createElement('img')
+    titleLogo.src='../Images/Logo_Title.jpg'
+    titleLogo.className = "mainlogo"
+    titleLogo.style.height = '200px'
+    titleLogo.style.width = '335px'
+    titleLogoDiv.append(titleLogo)
+}
+
+const clearTitleLogo = () => {
+    while (titleLogoDiv.firstChild) titleLogoDiv.removeChild(titleLogoDiv.firstChild)
+}
+
