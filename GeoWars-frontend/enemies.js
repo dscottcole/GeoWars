@@ -18,7 +18,7 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    // if (enemiesArray.length < 0) {
+    // if (enemiesArray.length < 5) {
         const width = 25
         const height = 25
     
