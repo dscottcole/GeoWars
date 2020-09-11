@@ -20,5 +20,5 @@ score5 = Score.create(score:135, time_alive: 80.500, accuracy: 20.50, user_id: y
 score6 = Score.create(score:115, time_alive: 70.659, accuracy: 17.10, user_id: dan.id)
 score7 = Score.create(score:30, time_alive: 20.010, accuracy: 50.25, user_id: jaz.id)
 score8 = Score.create(score:80, time_alive: 59.475, accuracy: 20.20, user_id: mello.id)
-score9 = Score.create(score:35, time_alive: 23.300, accuracy: 50.25, user_id: jaz.id)
-score10 = Score.create(score:5, time_alive: 5.100, accuracy: 50.50, user_id: dan.id)
+score9 = Score.create(score:10, time_alive: 10.300, accuracy: 50.25, user_id: jaz.id)
+score10 = Score.create(score:5, time_alive: 6.100, accuracy: 50.50, user_id: dan.id)
