@@ -52,21 +52,13 @@ const generateProjectile = (angle, quad, pX, pY) => {
     // }
 }
 
-// let mouseInterval
+
 
 const enableMouse = () => { 
     world.addEventListener('click', function(e) {
         e.preventDefault()
         clickFn(e)
-
-        // mouseInterval = setInterval(clickFn(e), 50)
     })
-
-    // world.addEventListener('mouseup', function(e) {
-        // console.log(e)
-
-        // clearInterval(mouseInterval)
-    // })
 }
 
 const clickFn = (e) => {
@@ -126,7 +118,6 @@ const drawProjectiles = () => {
 }
 
 const calcAccuracy = () => {
-    // accuracy = parseFloat(enemiesDestroyed/projectilesFired).toFixed(3)* 100
     accuracy = round((enemiesDestroyed/projectilesFired) * 100, 2)
 
     displayAccuracy()

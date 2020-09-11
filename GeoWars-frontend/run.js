@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enableRegistrationForm()
     loginCheck()
     enableButtons()
+    enableMouse()
 })
 
 const gameOn = () => {
@@ -21,11 +22,9 @@ const gameOn = () => {
     player.draw()
     enablePlayer()
     enableIntervals()
-    enableMouse()
     startTime = Date.now()
     appendMetrics()
 }
-
 
 const animate = () => {
     ctx.clearRect(0,0, world.width, world.height);
