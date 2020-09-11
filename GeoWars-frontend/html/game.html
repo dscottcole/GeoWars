@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<div class='allBackground'>
 <html>
     <head>
+        <title>Geo Wars Retro^2</title>
+        <meta name="authors" content="Yehong Piao & Daniel Cole">
     </head>
     <body>
         <div class='login'>
@@ -21,8 +22,10 @@
             <form class='registration-form'>
                 <label for="new-username">New Username:</label><br>
                 <input type="text" id="new-username" name="new-username"><br>
+                <br>
                 <label for="password">New Password:</label><br>
                 <input type="password" id="new-password" name="new-password"><br>
+                <br>
                 <label for="password">Password Confirmation:</label><br>
                 <input type="password" id="password-confirmation" name="password-confirmation">
                 <br>
@@ -30,15 +33,19 @@
                 <input type="submit" id="registration-submit" class='button' value="Register">
             </form>
         </div>
-        <div class='denied-login'></div>
-        <canvas id="world" width="800" height="600"></canvas>
-        <div class='metrics'></div>
+        <div class='Atlas'>
+            <div class='buffer'>
+                <canvas id="world" width="800" height="600"></canvas>
+            </div>
+            <div class='metrics'></div>
+        </div>
         <div class='scoreboard'>
-            <ol id='scoreboard'></ol>
         </div>
         <div class="button-menu"></div>
-
+        <div class="title-logo"></div>
+        <div class='denied-login'></div>
     </body>
+    <div class="corner-logo"></div>
     <link rel="stylesheet" href="../style.css"></link>
 
     <script src= "../interface.js"></script>
@@ -48,4 +55,3 @@
     <script src="../scoreboard.js"></script>
     <script src= "../run.js"></script>
 </html>
-</div>

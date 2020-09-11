@@ -31,22 +31,64 @@ const submitNewScore = (score, time, acc) => {
     })
 }
 
+let tableHeaders = ["Global Ranking", "Username", "Score", "Time Alive [seconds]", "Accuracy [%]"]
+
 const getScores = () => {
-    while (scoreOl.firstChild) scoreOl.removeChild(scoreOl.firstChild)
     fetch('http://localhost:3000/scores')
     .then(res => res.json())
     .then(scores => {
+        createScoreboardTable()
         scores.forEach(score => {
-            appendScores(score)
+            let scoreIndex = scores.indexOf(score) + 1
+            appendScores(score, scoreIndex)
         })
     })
 }
 
-const appendScores = (singleScore) => {
-    const scoreLi = document.createElement('li')
-    scoreLi.dataset.id = singleScore.id
-    scoreLi.innerText = `Username: ${singleScore.user.username}, Score: ${singleScore.score}, Time Survived: ${singleScore.time_alive} seconds, Accuracy: ${singleScore.accuracy}%`
-    scoreOl.append(scoreLi)
+const createScoreboardTable = () => {
+    while (scoreDiv.firstChild) scoreDiv.removeChild(scoreDiv.firstChild)
+    let scoreboardTable = document.createElement('table')
+    let scoreboardTableHead = document.createElement('thead')
+    scoreboardTableHead.className = 'scoreboardTableHead'
+    let scoreboardTableHeaderRow = document.createElement('tr')
+    scoreboardTableHeaderRow.className = 'scoreboardTableHeaderRow'
+
+    let scoreboardTableBody = document.createElement('tbody')
+    scoreboardTableBody.className = "scoreboardTable-Body"
+
+    scoreboardTableHead.append(scoreboardTableHeaderRow)
+    scoreboardTable.append(scoreboardTableHead)
+
+    scoreboardTable.className = 'scoreboardTable'
+    tableHeaders.forEach(header => {
+        let scoreHeader = document.createElement('th')
+        scoreHeader.innerText = header
+        scoreboardTableHeaderRow.append(scoreHeader)
+    })
+    scoreboardTable.append(scoreboardTableBody)
+    scoreDiv.append(scoreboardTable)
+}
+
+const appendScores = (singleScore, singleScoreIndex) => {
+    const scoreboardTable = document.querySelector('.scoreboardTable')
+
+    let scoreboardTableBodyRow = document.createElement('tr')
+    scoreboardTableBodyRow.className = 'scoreboardTableBodyRow'
+    if (singleScore.id !== undefined) {
+        scoreboardTableBodyRow.dataset.id = singleScore.id
+    }
+    let scoreRanking = document.createElement('td')
+    scoreRanking.innerText = singleScoreIndex
+    let usernameData = document.createElement('td')
+    usernameData.innerText = singleScore.user.username
+    let scoreData = document.createElement('td')
+    scoreData.innerText = singleScore.score
+    let timeData = document.createElement('td')
+    timeData.innerText = singleScore.time_alive
+    let accuracyData = document.createElement('td')
+    accuracyData.innerText = singleScore.accuracy
+    scoreboardTableBodyRow.append(scoreRanking, usernameData, scoreData, timeData, accuracyData)
+    scoreboardTable.append(scoreboardTableBodyRow)
 }
 
 const hideScoreboard = () => {
@@ -63,31 +105,31 @@ const refreshScoreboard = () => {
     showScoreboard()
     clearMetrics()
     getTenScores()
-    // getScores()
 }
-
 
 const getTenScores = () => {
-    while (scoreOl.firstChild) scoreOl.removeChild(scoreOl.firstChild)
     fetch('http://localhost:3000/scores')
     .then(res => res.json())
-    .then(scores => {            
-        let topTenScores = scores.splice(0,10)
-        topTenScores.forEach(score => {
-            appendScores(score)
-        })
+    .then(scores => {    
+        createScoreboardTable()
+    
+        for (let i = 0; i < 10; i++) {
+            appendScores(scores[i], i+1)
+        }
     })
 }
+
 const getUserScores = () => {
-    while (scoreOl.firstChild) scoreOl.removeChild(scoreOl.firstChild)
     fetch('http://localhost:3000/scores')
     .then(res => res.json())
-    .then(scores => {            
+    .then(scores => {
+        createScoreboardTable()           
         let userScores = scores.filter(score => 
             score.user_id === parseInt(window.localStorage.user_id)
         )
         userScores.forEach(score => {
-            appendScores(score)
+            let scoreIndex = scores.indexOf(score) + 1
+            appendScores(score, scoreIndex)
         })
     })
 }

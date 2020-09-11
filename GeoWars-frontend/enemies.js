@@ -18,7 +18,7 @@ class Enemy {
 }
 
 const generateEnemy = () => {
-    // if (enemiesArray.length < 25) {
+    // if (enemiesArray.length < 0) {
         const width = 25
         const height = 25
     
@@ -31,7 +31,7 @@ const generateEnemy = () => {
     // }
 }
 
-const generateX = (width) => Math.floor(Math.random() * (world.width - width))
+const generateX = () => Math.floor(Math.random() * (world.width))
 
 const xCheck = (width) => {
 
@@ -49,7 +49,7 @@ const xCheck = (width) => {
     }
 }
 
-const generateY = (height) => Math.floor(Math.random() * (world.height - height))
+const generateY = () => Math.floor(Math.random() * (world.height))
 
 const yCheck = (height) => {
 
@@ -68,15 +68,18 @@ const yCheck = (height) => {
 
 const drawEnemies = () => {
     
-    enemiesArray.forEach(enemy => {  
+    enemiesArray.forEach(enemy => {
 
-        if (enemy.xPos > player.xPos) {
+        let playerX = player.xPos
+        let playerY = player.yPos
+
+        if (enemy.xPos > playerX) {
             enemy.xPos -= enemy.velocity
         } else {
             enemy.xPos += enemy.velocity
         } 
 
-        if (enemy.yPos > player.yPos) {
+        if (enemy.yPos > playerY) {
             enemy.yPos -= enemy.velocity
         } else {
             enemy.yPos += enemy.velocity

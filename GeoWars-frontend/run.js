@@ -8,6 +8,7 @@ let enemyInterval
 let timeInterval
 
 document.addEventListener('DOMContentLoaded', () => {
+    appendCornerLogo()
     enableLoginForm()
     enableRegistrationForm()
     loginCheck()
@@ -78,12 +79,17 @@ const scoreIncrease = () => {
 
 const displayTime = () => {
     const survivalSpan = document.querySelector('#survivalTime')
-    survivalSpan.innerText = `Time Alive: ${survivalTime} seconds`
+    survivalSpan.innerText = `Time Alive:  ${survivalTime} seconds`
 }
 
 const displayAccuracy = () => {
     const accuracySpan = document.querySelector('#accuracy')
-    accuracySpan.innerText = `Accuracy: ${accuracy} %`
+    if (isNaN(accuracy)) {
+        accuracySpan.innerText = `Accuracy:  0 %`
+    } else {
+        accuracySpan.innerText = `Accuracy:  ${accuracy} %`
+    }
+    
 }
 
 const clearMetrics = () => {
