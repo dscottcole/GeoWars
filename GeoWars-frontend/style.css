@@ -41,7 +41,6 @@ body {
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
   font-size: 16px;
   margin: 4px 2px;
   transition-duration: 0.4s;
@@ -91,11 +90,11 @@ body {
   height: 50px;
 }
 
-.scoreboardTableBodyRow {
-
-}
-
 .scoreboardTableBodyRow:nth-child(odd){background-color: rgba(128, 128, 128, 0.050);}
+
+.scoreboardTableBodyRow:hover{
+  background-color: darkorange;
+}
 
 .scoreboardTable tr td {
   height: 25px;
