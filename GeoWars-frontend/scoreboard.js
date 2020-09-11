@@ -38,10 +38,12 @@ const getScores = () => {
     .then(res => res.json())
     .then(scores => {
         createScoreboardTable()
-        scores.forEach(score => {
+        let scoreIdArray = scores.map(score => score.id)
+        let maxScoreId = Math.max(...scoreIdArray)
+        for (const score of scores) {
             let scoreIndex = scores.indexOf(score) + 1
-            appendScores(score, scoreIndex)
-        })
+            appendScores(score, scoreIndex, maxScoreId)
+        }
     })
 }
 
@@ -69,10 +71,13 @@ const createScoreboardTable = () => {
     scoreDiv.append(scoreboardTable)
 }
 
-const appendScores = (singleScore, singleScoreIndex) => {
+const appendScores = (singleScore, singleScoreIndex, newestScoreId) => {
     const scoreboardTable = document.querySelector('.scoreboardTable')
 
     let scoreboardTableBodyRow = document.createElement('tr')
+    if (parseInt(window.localStorage.user_id) === singleScore.user_id && singleScore.id === newestScoreId) {
+        scoreboardTableBodyRow.id = 'latestUserScore'
+    }
     scoreboardTableBodyRow.className = 'scoreboardTableBodyRow'
     if (singleScore.id !== undefined) {
         scoreboardTableBodyRow.dataset.id = singleScore.id
@@ -112,9 +117,10 @@ const getTenScores = () => {
     .then(res => res.json())
     .then(scores => {    
         createScoreboardTable()
-    
+        let scoreIdArray = scores.map(score => score.id)
+        let maxScoreId = Math.max(...scoreIdArray)    
         for (let i = 0; i < 10; i++) {
-            appendScores(scores[i], i+1)
+            appendScores(scores[i], i+1, maxScoreId)
         }
     })
 }
@@ -123,14 +129,17 @@ const getUserScores = () => {
     fetch('http://localhost:3000/scores')
     .then(res => res.json())
     .then(scores => {
-        createScoreboardTable()           
+        createScoreboardTable()    
+        let scoreIdArray = scores.map(score => score.id)
+        let maxScoreId = Math.max(...scoreIdArray)         
         let userScores = scores.filter(score => 
             score.user_id === parseInt(window.localStorage.user_id)
         )
-        userScores.forEach(score => {
-            let scoreIndex = scores.indexOf(score) + 1
-            appendScores(score, scoreIndex)
-        })
+        
+        for (const score of userScores) {
+            let scoreIndex = userScores.indexOf(score) + 1
+            appendScores(score, scoreIndex, maxScoreId)
+        }
     })
 }
 
