@@ -92,13 +92,20 @@ body {
 
 .scoreboardTableBodyRow:nth-child(odd){background-color: rgba(128, 128, 128, 0.050);}
 
+#latestUserScore {
+  background-color: crimson;
+}
+
 .scoreboardTableBodyRow:hover{
   background-color: darkorange;
 }
 
+#latestUserScore {
+  background-color: crimson;
+}
+
 .scoreboardTable tr td {
   height: 25px;
-
 }
 
 span {
