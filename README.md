@@ -1,5 +1,4 @@
 # GeoWars
-Mod 3 Project at Flatiron School
 
 Re-create Geometry Wars Retro as best as possible.
 
